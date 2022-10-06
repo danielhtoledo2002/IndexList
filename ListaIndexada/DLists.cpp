@@ -1,4 +1,3 @@
-
 #include "DLists.h"
 
 DLIndex::DLIndex(ECampos pType, bool pFrec)

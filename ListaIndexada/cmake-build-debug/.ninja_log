@@ -1,0 +1,8 @@
+# ninja log v5
+0	397	1665095922056648070	CMakeFiles/ListaIndexada.dir/ListaIndexada/DLists.cpp.o	2e60a97fa90856da
+397	440	1665095922096647293	ListaIndexada	57d1448ca647b0c0
+0	382	1665095922039981727	CMakeFiles/ListaIndexada.dir/ListaIndexada/ListaIndexada.cpp.o	6acd49a14cb5f25
+0	15	1665097213542988304	build.ninja	7fd483f218751a11
+0	283	1665097213829649810	CMakeFiles/ListaIndexada.dir/ListaIndexada.cpp.o	a519d7dcba6e89c0
+0	293	1665097213839649631	CMakeFiles/ListaIndexada.dir/DLists.cpp.o	7d4134230317ae08
+293	354	1665097213899648550	ListaIndexada	6614fa1649691d7f
