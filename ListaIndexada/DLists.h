@@ -49,12 +49,14 @@ public:
     void push_back(PDATA pData);
     void push(PDATA pData);
 
+    void del(PDATA pData);
+
     //PDNODE top_front(void);
     //PDNODE top_back(void);
     PDATA get(bool pRev = false);
 
-    //void pop_front(void);
-    //void pop_back(void);
+    void pop_front(void);
+    void pop_back(void);
     //void del(string pNombre, bool pForce = false);
 
     bool isEmpty(void);
@@ -96,6 +98,8 @@ public:
     //PDNODE top_front(void);
     //PDNODE top_back(void);
     PDATA get(ECampos pCampo, bool pRev = false);
+    void pop(string pNombre, string pApellido,
+             string pFNac, double pSalario);
 
     //void pop_front(void);
     //void pop_back(void);

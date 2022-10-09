@@ -23,7 +23,8 @@ int main()
     while (lItem = lLista.get(ECampos::apellido, true)) {
         cout << "\t" << lItem->sNombre << " " << lItem->sApellido << endl;
     }
-
+    lLista.pop("Albert", "Einstein", "1879-03-14", 100);
+    lLista.repr(ECampos::nombre);
     cout << endl;
 
 }

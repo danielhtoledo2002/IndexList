@@ -58,6 +58,7 @@ void DLIndex::push_front(PDATA pData)
     }
 } // push_front
 
+
 void DLIndex::push_back(PDATA pData)
 {
     if (aHead == NULL) {
@@ -65,21 +66,7 @@ void DLIndex::push_back(PDATA pData)
         aTail = aHead;
     }
     else {
-        /*bool lDo = true;
-        if (aFrec) {
-            if (pNombre == aTail->sNombre) {
-                (aTail->sFrec)++;
-                lDo = false;
-            }
-            else {
-                PDNODE lItem = find(pNombre);
-                if (lItem != NULL) {
-                    (lItem->sFrec)++;
-                    lDo = false;
-                }
-            }
-        }
-        if (lDo) {*/
+
         PDNODE lTemp = getNewNode(pData);
         aTail->sNext = lTemp;
         lTemp->sPrev = aTail;
@@ -117,21 +104,7 @@ void DLIndex::push(PDATA pData)
     }
 } // push
 
-/*PDNODE DLIndex::top_front(void)
-{
-    if (aHead) {
-        return aHead;
-    }
-    return NULL;
-} // top_front*/
 
-/*PDNODE DLIndex::top_back(void)
-{
-    if (aHead) {
-        return aTail;
-    }
-    return NULL;
-} // top_back*/
 
 PDATA DLIndex::get(bool pRev)
 {
@@ -371,6 +344,51 @@ PDNODE DLIndex::getNewNode(PDATA pData)
 
     return lTemp;
 } // getNewNode
+void DLIndex::pop_back() {
+    if (aHead) {
+        PDNODE lTemp = aTail;
+        aTail = aTail->sPrev;
+        if (aTail) {
+            aTail->sNext = NULL;
+        }
+        else {
+            aHead = NULL;
+            aCurr = NULL;
+        }
+        delete lTemp;
+    }
+}
+void DLIndex::pop_front() {
+    if (aHead) {
+        PDNODE lTemp = aHead;
+        aHead = aHead->sNext;
+        if (aHead) {
+            aHead->sPrev = NULL;
+        }
+        else {
+            aTail = NULL;
+            aCurr = NULL;
+        }
+        delete lTemp;
+    }
+}
+
+void DLIndex::del(PDATA pData) {
+    if (aHead) {
+        if (comp(pData, aHead->sData) == 0)
+            pop_front();
+        else if (comp(pData, aTail->sData) == 0)
+            pop_back();
+        else {
+            PDNODE lTemp = search(pData);
+            if (aCurr == lTemp)
+                aCurr = lTemp->sNext;
+                lTemp->sPrev->sNext = lTemp->sNext;
+                lTemp->sNext->sPrev = lTemp->sPrev;
+                delete lTemp;
+        }
+    }
+}
 
 
 //-----------
@@ -389,6 +407,7 @@ DList::DList(bool pFrec)
     aISal = new DLIndex(ECampos::salario);
 } // Constructor
 
+
 DList::~DList(void)
 {
     clean();
@@ -400,6 +419,7 @@ DList::~DList(void)
 
     // cout << "Bye!" << endl;
 } // Destructor
+
 
 void DList::clean(void)
 {
@@ -738,4 +758,24 @@ PDNODE DList::getNewNode(string pNombre, string pApellido,
     }
 
     return lTemp;
+
 } // getNewNode
+void DList::pop(std::string pNombre, std::string pApellido, std::string pFNac, double pSalario) {
+    PDNODE lTemp = new DNODE;
+
+    if (lTemp) {
+        lTemp->sData = new DATA;
+        lTemp->sData->sNombre = pNombre;
+        aINom->del(lTemp->sData);
+
+        lTemp->sData->sApellido = pApellido;
+        aIApe->del(lTemp->sData);
+
+        lTemp->sData->sFNac = pFNac;
+        aIFNa->del(lTemp->sData);
+
+        lTemp->sData->sSalario = pSalario;
+        aISal->del(lTemp->sData);
+    }
+    delete lTemp;
+}
