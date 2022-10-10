@@ -38,7 +38,6 @@ protected:
     PDNODE aCurr;
     bool aFrec;
     ECampos aType;
-
 public:
     DLIndex(ECampos pType, bool pFrec = false);
     ~DLIndex(void);
@@ -48,27 +47,21 @@ public:
     void push_front(PDATA pData);
     void push_back(PDATA pData);
     void push(PDATA pData);
-
-    void del(PDATA pData);
-
-    //PDNODE top_front(void);
-    //PDNODE top_back(void);
     PDATA get(bool pRev = false);
-
     void pop_front(void);
     void pop_back(void);
-    //void del(string pNombre, bool pForce = false);
-
+    void del(PDATA pData);
     bool isEmpty(void);
     void repr(bool pRev = false);
     //void read(string pPath, char pMethod = 'b');
     //void write(string pPath, bool pRev = false);
-
+    //PDNODE top_front(void);
+    //PDNODE top_back(void);
 private:
     int comp(PDATA pA, PDATA pB);
-    //PDNODE find(string pNombre);
     PDNODE search(PDATA pData);
     PDNODE getNewNode(PDATA pData);
+    //PDNODE find(string pNombre);
 }; //DLIndex
 
 class DList

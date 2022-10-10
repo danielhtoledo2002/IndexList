@@ -19,12 +19,21 @@ int main()
 
     cout << endl;
 
+    cout <<" LISTA CON TODOS LOS DATOS !"<< endl;
+
     PDATA lItem = NULL;
     while (lItem = lLista.get(ECampos::apellido, true)) {
         cout << "\t" << lItem->sNombre << " " << lItem->sApellido << endl;
     }
+
     lLista.pop("Albert", "Einstein", "1879-03-14", 100);
-    lLista.repr(ECampos::nombre);
+
+    cout <<" LISTA CON DATO BORRADOS !"<< endl;
+
+    PDATA lItem2 = NULL;
+    while (lItem2 = lLista.get(ECampos::apellido, true)) {
+        cout << "\t" << lItem2->sNombre << " " << lItem2->sApellido << endl;
+    }
     cout << endl;
 
 }

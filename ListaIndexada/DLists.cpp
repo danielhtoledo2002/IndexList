@@ -1,5 +1,7 @@
 #include "DLists.h"
 
+// -------------------CLASE DE HIJA DE LISTA INDEXADA-------------------
+
 DLIndex::DLIndex(ECampos pType, bool pFrec)
 {
     aHead = NULL;
@@ -180,34 +182,6 @@ PDATA DLIndex::get(bool pRev)
     }
 } // pop_back*/
 
-/*void DLIndex::del(string pNombre, bool pForce)
-{
-    if (aHead) {
-        if (aHead->sNombre == pNombre)
-            pop_front();
-        else if (aTail->sNombre == pNombre)
-            pop_back();
-        else {
-            PDNODE lTemp = find(pNombre);
-            if (lTemp) {
-                if (!aFrec)
-                    lTemp->sFrec = 0;
-                else
-                    if (!pForce)
-                        (lTemp->sFrec)--;
-                    else
-                        lTemp->sFrec = 0;
-                if (lTemp->sFrec == 0) {
-                    if (aCurr == lTemp)
-                        aCurr = lTemp->sNext;
-                    lTemp->sPrev->sNext = lTemp->sNext;
-                    lTemp->sNext->sPrev = lTemp->sPrev;
-                    delete lTemp;
-                }
-            }
-        }
-    }
-} // del*/
 
 bool DLIndex::isEmpty(void)
 {
@@ -390,9 +364,7 @@ void DLIndex::del(PDATA pData) {
     }
 }
 
-
-//-----------
-
+//----------- CLASE MADRE DE LA LISTA DOBLEMENTE ENLAZADA ----------------
 
 DList::DList(bool pFrec)
 {
@@ -472,7 +444,6 @@ void DList::push_back(string pNombre, string pApellido,
     if (aHead == NULL) {
         aHead = getNewNode(pNombre, pApellido, pFNac, pSalario);
         aTail = aHead;
-
         aINom->push(aHead->sData);
         aIApe->push(aHead->sData);
         aIFNa->push(aHead->sData);
@@ -498,8 +469,7 @@ void DList::push_back(string pNombre, string pApellido,
             aTail->sNext = lTemp;
             lTemp->sPrev = aTail;
             aTail = lTemp;
-
-            aINom->push(lTemp->sData);
+            aINom->push(lTemp->sData);    //PDNODE find(string pNombre);
             aIApe->push(lTemp->sData);
             aIFNa->push(lTemp->sData);
             aISal->push(lTemp->sData);
@@ -761,21 +731,24 @@ PDNODE DList::getNewNode(string pNombre, string pApellido,
 
 } // getNewNode
 void DList::pop(std::string pNombre, std::string pApellido, std::string pFNac, double pSalario) {
-    PDNODE lTemp = new DNODE;
+    auto lTemp = new DNODE;
 
     if (lTemp) {
+        // Creamos un apuntador a un nodo para poder acceder a la clase Dlindex y poder acceder a los métodos de la clase.
         lTemp->sData = new DATA;
-        lTemp->sData->sNombre = pNombre;
+        // Borramos nombre
+        lTemp->sData->sNombre = std::move(pNombre);
         aINom->del(lTemp->sData);
-
-        lTemp->sData->sApellido = pApellido;
+        // Borramos apellido
+        lTemp->sData->sApellido = std::move(pApellido);
         aIApe->del(lTemp->sData);
-
-        lTemp->sData->sFNac = pFNac;
+        // Borramos fecha de nacimiento
+        lTemp->sData->sFNac = std::move(pFNac);
         aIFNa->del(lTemp->sData);
-
+        // Borramos salario
         lTemp->sData->sSalario = pSalario;
         aISal->del(lTemp->sData);
     }
+    delete lTemp->sData;
     delete lTemp;
-}
+}//pop
