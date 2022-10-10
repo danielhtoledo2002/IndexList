@@ -26,6 +26,8 @@ int main()
         cout << "\t" << lItem->sNombre << " " << lItem->sApellido << endl;
     }
 
+    cout << endl;
+
     lLista.pop("Albert", "Einstein", "1879-03-14", 100);
 
     cout <<" LISTA CON DATO BORRADOS !"<< endl;

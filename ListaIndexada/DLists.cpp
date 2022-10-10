@@ -1,6 +1,6 @@
 #include "DLists.h"
 
-// -------------------CLASE DE HIJA DE LISTA INDEXADA-------------------
+// -------------------CLASE DE HIJA ------------------
 
 DLIndex::DLIndex(ECampos pType, bool pFrec)
 {
@@ -349,9 +349,9 @@ void DLIndex::pop_front() {
 
 void DLIndex::del(PDATA pData) {
     if (aHead) {
-        if (comp(pData, aHead->sData) == 0)
+        if (comp(pData, aHead->sData) <= 0)
             pop_front();
-        else if (comp(pData, aTail->sData) == 0)
+        else if (comp(pData, aTail->sData) >= 0)
             pop_back();
         else {
             PDNODE lTemp = search(pData);
